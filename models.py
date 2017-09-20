@@ -11,3 +11,12 @@ class Signups(Base):
     name = Column(String(256))
     email = Column(String(256), unique=True)
     date_signed_up = Column(DateTime())
+
+
+class Models(Base):
+
+    __tablename__ = 'models'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(256))
+    ext_id = Column(String(256), unique=True)
+    parse_date = Column(DateTime())
