@@ -5,10 +5,10 @@ import datetime
 from models import Models
 from database import db_session
 
-class Model:
+class Family:
 
     def get_data(self, data):
-        url = 'https://rem.ru/ajax/catalog/getModels/'
+        url = 'https://rem.ru/ajax/catalog/getFamilies/'
         headers = {
             'Origin': 'https://rem.ru',
             'Referer': 'https://rem.ru/catalog/shini-496/',
@@ -19,7 +19,7 @@ class Model:
 
 
 if __name__ == '__main__':
-    model = Model()
-    data = {'brand_oid': '281694020042754', 'family_oid': '283175783759904'}
-    r = json.loads(model.get_data(data).text.replace('|SSD|', ''))['json']['models_list']
+    model = Family()
+    data = {'brand_oid': '281694020042754'}
+    r = json.loads(model.get_data(data).text.replace('|SSD|', ''))['json']['families_list']
     print(r)

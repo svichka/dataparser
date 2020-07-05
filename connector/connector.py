@@ -20,3 +20,10 @@ class Connector:
 
             return resp
 
+    def post_data(self, data):
+
+        with requests.post(self._url, headers=self._headers, data=data) as resp:
+            if resp.status_code != 200:
+                raise RuntimeError("Invalid response received: code: %d, message: %s" % (resp.status_code, resp.text))
+
+            return resp
