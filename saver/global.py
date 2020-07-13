@@ -48,7 +48,7 @@ class Global:
 
     def run_p_o(self):
         i = 1
-        for item in db_session.query(CarObject).filter(CarObject.id > 1998):
+        for item in db_session.query(CarObject).filter(CarObject.id):
             object_saver = saver.main_saver.ProductSaver()
             object_saver.set_object_id(item.id)
             object_saver.save({
