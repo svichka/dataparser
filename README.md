@@ -1,5 +1,3 @@
-This is a working example of a multi-container flask application with Postgres as the database fronted by the nginx reverse proxy. See my [blog post](http://www.ameyalokare.com/docker/2017/09/20/nginx-flask-postgres-docker-compose.html) for a detailed explanation.
-
 ## Usage
 
 1. Bootstrap the DB
@@ -13,4 +11,34 @@ $ docker-compose run --rm flaskapp /bin/bash -c "cd /opt/services/flaskapp/src &
 $ docker-compose up -d
 ```
 
-3. Browse to localhost:8080 to see the app in action.
+3. Launch bash in the container
+```bash
+$ docker exec -it nginx-flask-postgres-docker-compose-example_flaskapp_1 /bin/bash
+```
+browse to
+```bash
+$ /opt/services/flaskapp/src/saver
+```
+
+and run 
+
+```bash
+$ python global.py all
+```
+for separate running use following options:
+
+`brand` - for parsing brands and families
+
+`model` - for parsing car models fro the each family
+
+`object` - for generate many-to-many table
+
+`item` - for parsing items
+
+## Troubleshooting
+
+If you have a problems with modules etc, try to set env variable `$PYTHONPATH`:
+
+```bash
+$ export PYTHONPATH="/opt/services/flaskapp/src"
+``` 

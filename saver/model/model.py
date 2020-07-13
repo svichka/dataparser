@@ -2,7 +2,6 @@ from connector.connector import Connector
 import json
 import datetime
 
-from models import Models
 from database import db_session
 
 class Model:
@@ -17,9 +16,11 @@ class Model:
         conn = Connector(url, headers)
         return conn.post_data(data)
 
+    def process_data(self, data):
+        return json.loads(self.get_data(data).text.replace('|SSD|', ''))['json']['models_list']
+
 
 if __name__ == '__main__':
     model = Model()
     data = {'brand_oid': '281694020042754', 'family_oid': '283175783759904'}
-    r = json.loads(model.get_data(data).text.replace('|SSD|', ''))['json']['models_list']
-    print(r)
+    print(model.process_data(data))
